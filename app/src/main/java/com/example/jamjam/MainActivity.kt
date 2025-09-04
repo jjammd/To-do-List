@@ -39,24 +39,22 @@ class MainActivity : AppCompatActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, taskList)
         listView.adapter = adapter
 
-        // ✅ Make FAB functional
+        // ✅ Make FAB functional (No more TaskFragment!)
         binding.fab.setOnClickListener {
-            val input = android.widget.EditText(this)
-            androidx.appcompat.app.AlertDialog.Builder(this)
+            val input = EditText(this)
+            AlertDialog.Builder(this)
                 .setTitle("Add New Task")
                 .setView(input)
                 .setPositiveButton("Add") { _, _ ->
                     val task = input.text.toString()
                     if (task.isNotEmpty()) {
-                        val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
-                        val taskFragment = navHost?.childFragmentManager?.fragments?.find { it is TaskFragment } as? TaskFragment
-                        taskFragment?.addNewTask(task)
+                        taskList.add(task)
+                        adapter.notifyDataSetChanged()
                     }
                 }
                 .setNegativeButton("Cancel", null)
                 .show()
         }
-
 
         // Navigation setup
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -64,31 +62,12 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home, R.id.nav_gallery, R.id.nav_task),
+            setOf(R.id.nav_home, R.id.nav_gallery), // 🔴 Removed R.id.nav_task
             drawerLayout
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    private fun addNewTask() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Add New Task")
-
-        val input = EditText(this)
-        builder.setView(input)
-
-        builder.setPositiveButton("Add") { _, _ ->
-            val task = input.text.toString()
-            if (task.isNotEmpty()) {
-                taskList.add(task)
-                adapter.notifyDataSetChanged()
-            }
-        }
-
-        builder.setNegativeButton("Cancel", null)
-        builder.show()
     }
 
     override fun onSupportNavigateUp(): Boolean {

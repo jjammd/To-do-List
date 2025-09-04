@@ -1,52 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2B2B2B"
-    tools:context=".ui.home.HomeFragment">
-
-    <!-- Title -->
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo"
-        android:text="Hello Jam!"
-        android:textColor="#FFFEFE"
-        android:textSize="60sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- Subtitle -->
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Here are your tasks:"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/textView6"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <!-- ✅ Dynamic Checklist -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/taskRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:contentDescription="Add Task"
-        android:src="@android:drawable/ic_input_add"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    app:layoutDescription="@xml/fragment_home_scene"
+    tools:context=".ui.home.HomeFragment" />
